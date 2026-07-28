@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 420" width="400" height="420">
+  <!-- Monograma ASM — Academia Sidnei Marcelo -->
+  <g fill="none" stroke="#FFFFFF" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M 200 26 L 106 236 M 90 236 L 122 236"/>
+    <path d="M 200 26 L 294 236 M 278 236 L 310 236"/>
+    <path d="M 152 148 L 248 148"/>
+    <path d="M 264 118 C 264 82, 224 66, 194 78 C 156 94, 146 142, 176 174 C 208 209, 254 226, 260 268 C 266 314, 218 340, 176 326 C 150 317, 138 294, 142 274"/>
+    <path d="M 112 382 L 128 382 L 128 262 L 200 366 L 272 262 L 272 382 M 256 382 L 288 382"/>
+  </g>
+</svg>

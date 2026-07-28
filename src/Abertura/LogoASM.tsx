@@ -3,6 +3,14 @@ import { Easing, interpolate, useCurrentFrame } from "remotion";
 // Monograma ASM em traço vetorial — cada path é desenhado na tela
 // via pathLength normalizado (dasharray 1 → dashoffset 1..0).
 
+export const ASM_PATHS = {
+  aEsquerda: "M 200 26 L 106 236 M 90 236 L 122 236",
+  aDireita: "M 200 26 L 294 236 M 278 236 L 310 236",
+  aBarra: "M 152 148 L 248 148",
+  s: "M 264 118 C 264 82, 224 66, 194 78 C 156 94, 146 142, 176 174 C 208 209, 254 226, 260 268 C 266 314, 218 340, 176 326 C 150 317, 138 294, 142 274",
+  m: "M 112 382 L 128 382 L 128 262 L 200 366 L 272 262 L 272 382 M 256 382 L 288 382",
+} as const;
+
 type StrokeProps = {
   d: string;
   from: number;
@@ -18,7 +26,7 @@ const DrawnPath: React.FC<StrokeProps> = ({ d, from, duration }) => {
       pathLength={1}
       fill="none"
       stroke="#FFFFFF"
-      strokeWidth={7}
+      strokeWidth={6}
       strokeLinecap="round"
       strokeLinejoin="round"
       strokeDasharray={1}
@@ -35,26 +43,18 @@ export const LogoASM: React.FC<{ size: number }> = ({ size }) => {
   return (
     <svg
       width={size}
-      height={size * 1.1}
-      viewBox="0 0 400 440"
+      height={size * 1.05}
+      viewBox="0 0 400 420"
       style={{ overflow: "visible" }}
     >
       {/* A — duas pernas e a barra */}
-      <DrawnPath d="M 200 30 L 118 210 M 104 210 L 132 210" from={0} duration={16} />
-      <DrawnPath d="M 200 30 L 282 210 M 268 210 L 296 210" from={8} duration={16} />
-      <DrawnPath d="M 152 146 L 248 146" from={18} duration={10} />
+      <DrawnPath d={ASM_PATHS.aEsquerda} from={0} duration={16} />
+      <DrawnPath d={ASM_PATHS.aDireita} from={8} duration={16} />
+      <DrawnPath d={ASM_PATHS.aBarra} from={18} duration={10} />
       {/* S — curva grande atravessando o monograma */}
-      <DrawnPath
-        d="M 262 128 C 262 96, 224 82, 196 92 C 158 105, 148 150, 176 180 C 206 212, 250 228, 256 268 C 262 312, 216 338, 176 324 C 150 315, 138 292, 142 272"
-        from={24}
-        duration={34}
-      />
+      <DrawnPath d={ASM_PATHS.s} from={24} duration={34} />
       {/* M — base do monograma */}
-      <DrawnPath
-        d="M 118 404 L 132 404 L 132 316 L 200 396 L 268 316 L 268 404 M 254 404 L 282 404"
-        from={52}
-        duration={26}
-      />
+      <DrawnPath d={ASM_PATHS.m} from={52} duration={26} />
     </svg>
   );
 };
