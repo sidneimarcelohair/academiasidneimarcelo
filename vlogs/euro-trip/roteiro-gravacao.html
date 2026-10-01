@@ -104,6 +104,19 @@ td.n { font-family: var(--display); font-weight: 600; color: var(--accent); }
 button { font: inherit; font-size: 13px; padding: 7px 12px; border-radius: 6px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); cursor: pointer; }
 button.danger { border-color: var(--warn); color: var(--warn); }
 footer { margin-top: 28px; font-size: 13px; color: var(--muted); }
+.findings { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.findings li { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 12px 14px; display: grid; gap: 3px; }
+.findings b { font-weight: 600; }
+.findings span { color: var(--muted); font-size: 14px; }
+.ref-body { padding: 0 16px 16px; display: grid; gap: 10px; font-size: 14px; }
+.ref-body p { max-width: 64ch; }
+.stats { display: flex; flex-wrap: wrap; gap: 6px; }
+.stats span { font-size: 12px; font-variant-numeric: tabular-nums; padding: 2px 8px; border-radius: 4px; background: var(--bg); border: 1px solid var(--line); color: var(--muted); }
+.take { border-left: 3px solid var(--accent); padding-left: 10px; }
+.thumb { display: grid; gap: 4px; border: 1px dashed var(--accent); border-radius: 8px; padding: 10px 14px; }
+.thumb p { font-size: 14px; }
+.thumb .t { font-weight: 600; font-size: 15px; }
+td.wrap-cell { white-space: normal; min-width: 240px; }
 @media (prefers-reduced-motion: reduce) { .bar span { transition: none; } }
 </style>
 
@@ -111,13 +124,14 @@ footer { margin-top: 28px; font-size: 13px; color: var(--muted); }
   <div class="hero-in">
     <div class="eyebrow">Sidnei Marcelo Hair · Vlog de viagem · Outubro 2026</div>
     <h1>Euro Trip · Roteiro de Gravação</h1>
-    <p>Sete cidades, uma série no YouTube. Marque cada tomada quando gravar. As marcações ficam salvas neste aparelho.</p>
+    <p>Sete cidades, uma série no YouTube. Versão 2, ajustada a partir de 12 vídeos de 5 canais de viagem. Marque cada tomada quando gravar. As marcações ficam salvas neste aparelho.</p>
     <div class="progress"><div class="bar"><span id="bar"></span></div><span id="total">0 de 0 itens</span></div>
   </div>
 </header>
 
 <nav class="route" aria-label="Rota">
   <div class="route-in">
+    <a class="base" href="#referencias">Referências</a>
     <a class="base" href="#base">Antes de gravar</a>
     <a href="#madri">Madri</a><span class="sep">→</span>
     <a href="#toledo">Toledo</a><span class="sep">→</span>
@@ -126,26 +140,83 @@ footer { margin-top: 28px; font-size: 13px; color: var(--muted); }
     <a href="#viena">Viena</a><span class="sep">→</span>
     <a href="#bratislava">Bratislava</a><span class="sep">→</span>
     <a href="#budapeste">Budapeste</a>
+    <a class="base" href="#edicao">Edição</a>
     <a class="base" href="#fimdodia">Fim do dia</a>
   </div>
 </nav>
 
 <main class="wrap">
 
+  <section class="block" id="referencias">
+    <h2>O que os 5 canais ensinam</h2>
+    <p class="lead">Analisei 12 vídeos: os mais vistos e os mais recentes de cada canal, além dos vídeos deles em Madri e Praga. Li as transcrições completas, os capítulos, os números e as thumbnails. O YouTube bloqueou o download das imagens dos vídeos, então o ritmo foi medido pelo tempo de fala, não por contagem de cortes.</p>
+    <ul class="findings">
+      <li><b>Ninguém abre com vinheta</b><span>Em 11 dos 12 vídeos a primeira fala acontece no primeiro segundo. Quem abre diferente (Emilim, no Caminho de Santiago) usa 15 segundos de montagem com música e frases soltas do próprio vídeo, e só depois cumprimenta.</span></li>
+      <li><b>O gancho é uma promessa ou uma pergunta</b><span>"Eu tenho apenas 24 horas em Praga pra te mostrar o que fazer e se ela vale a sua visita" (Estevam). "Uma a cada três pessoas nesse país é milionária. Mas por qual razão?" (Estevam, Mônaco, 2,5 milhões de views).</span></li>
+      <li><b>Preço é conteúdo</b><span>Estevam cita preço 37 vezes em Praga e 70 vezes em Mônaco. Mapa Carimbado, 33 vezes. O público brasileiro quer saber quanto custa, sempre convertido para reais.</span></li>
+      <li><b>Vídeos longos</b><span>Os vídeos de cidade desses canais têm de 28 a 55 minutos. Para o seu canal, que está começando em viagem, 20 a 30 minutos nas cidades grandes é o ponto seguro.</span></li>
+      <li><b>Fala com respiros de imagem</b><span>Estevam fala 80% do tempo e solta uma montagem com música de 15 a 37 segundos mais ou menos a cada 3 minutos. Emilim chega a 35 montagens num vídeo. Mundo Sem Fim quase não para de falar, mas está sempre em ação, nunca parado explicando.</span></li>
+      <li><b>Série numerada</b><span>"País número dois da nossa Eurotrip" (Estevam). "Vídeo 28 de 50" (Um Casal de Amigos Meu). "Um vlog por dia" (Emilim). Numerar faz a pessoa maratonar.</span></li>
+      <li><b>A história pessoal engaja mais</b><span>O vídeo recente da Emilim no Caminho de Santiago tem 4,8% de curtidas por view, quase o dobro do vídeo de roteiro dela em Madri (2,5%). Ela fecha contando por que decidiu fazer a viagem.</span></li>
+      <li><b>A thumbnail tem uma fórmula</b><span>Pessoa sorrindo ou apontando, cartão-postal atrás, nome da cidade enorme e no máximo 4 palavras de promessa ("BARATA E LINDA!", "NÃO EXISTEM POBRES NESSE PAÍS!"). A única thumbnail sem texto da amostra é a do vídeo com menos views.</span></li>
+    </ul>
+
+    <details class="city">
+      <summary><h3>Estevam Pelo Mundo</h3><span class="meta">1.274 vídeos · o mais visto tem 14 milhões</span></summary>
+      <div class="ref-body">
+        <div class="stats"><span>Praga em 24h · set/2026 · 49 min · 128 mil</span><span>Mônaco · 2023 · 54 min · 2,5 mi</span><span>80–93% de fala</span></div>
+        <p>Abre falando no segundo zero, com a promessa do vídeo, e já entra num momento real: em Praga, quase perdeu o trem vindo de Budapeste. Mostra o trem, o hotel, o café da manhã e o preço de tudo. Chama a série de "Eurotrip" e numera os países.</p>
+        <p class="take"><b>Pra você:</b> gancho com promessa, preço em reais e a viagem tratada como série.</p>
+      </div>
+    </details>
+    <details class="city">
+      <summary><h3>Mapa Carimbado</h3><span class="meta">231 vídeos · fez Madri, Toledo e Praga</span></summary>
+      <div class="ref-body">
+        <div class="stats"><span>Praga 3 dias · mar/2026 · 45 min · 23 mil</span><span>Madri · fev/2026 · 49 min · 9 mil</span><span>91–96% de fala</span></div>
+        <p>Formato de roteiro prático: em 30 segundos promete "onde comer, o que fazer e quanto custa". O vídeo de Praga tem 35 capítulos, um por lugar, o que ajuda na busca do YouTube. A narração quase não para, e os vídeos da Europa deles ficam bem abaixo dos vídeos do Brasil.</p>
+        <p class="take"><b>Pra você:</b> capítulos por lugar, sim. Narração sem pausa, não.</p>
+      </div>
+    </details>
+    <details class="city">
+      <summary><h3>Emilim Schmitz</h3><span class="meta">362 vídeos · Jericoacoara tem 1,3 milhão</span></summary>
+      <div class="ref-body">
+        <div class="stats"><span>Madri 4 dias · 2024 · 47 min · 190 mil</span><span>Caminho de Santiago · jul/2026 · 30 min · 140 mil</span><span>64–79% de fala</span></div>
+        <p>A mais cinematográfica do grupo: muitos trechos só com imagem e música entre as falas. No Caminho de Santiago, abre com uma montagem de 15 segundos, conta a jornada como algo interno e fecha explicando por que decidiu ir. É o vídeo dela com mais curtidas por view. Nas thumbnails, ela aparece de braços abertos na frente do cartão-postal.</p>
+        <p class="take"><b>Pra você:</b> é o estilo mais próximo do seu. Emoção, montagens e o seu porquê.</p>
+      </div>
+    </details>
+    <details class="city">
+      <summary><h3>Um Casal de Amigos Meu</h3><span class="meta">462 vídeos · moram em Madri</span></summary>
+      <div class="ref-body">
+        <div class="stats"><span>Guia de Madri · 2024 · 37 min · 150 mil</span><span>Madri é cara? · set/2026 · 16 min · 9 mil</span><span>96–100% de fala</span></div>
+        <p>Guia por assunto, com 21 capítulos: aplicativos, transporte, dinheiro, comida e segurança. O vídeo mais visto do canal é sobre batedores de carteira. Informação útil continua sendo achada na busca por anos. Os vídeos recentes, com thumbnail sem texto e abertura falando de meta de inscritos, ficam na casa dos 9 mil.</p>
+        <p class="take"><b>Pra você:</b> um minuto de dica prática por cidade (transporte, segurança, dinheiro) e nunca thumbnail sem texto.</p>
+      </div>
+    </details>
+    <details class="city">
+      <summary><h3>Mundo Sem Fim</h3><span class="meta">997 vídeos · Supermercado na China tem 5,8 milhões</span></summary>
+      <div class="ref-body">
+        <div class="stats"><span>Primeiras impressões da Tailândia · set/2026 · 40 min · 725 mil</span><span>Comida de rua na Tailândia · set/2026 · 28 min · 915 mil</span><span>93–96% de fala</span></div>
+        <p>"Fala galera" e já está no meio da ação: pegando ônibus, pedindo espetinho de crocodilo. Testam coisas ao vivo, perguntam preço e reagem de verdade. Títulos simples e repetíveis: "Primeiras impressões de…", "Provando comidas de rua em…". Na thumbnail, a pessoa segura a coisa curiosa, com uma etiqueta de texto.</p>
+        <p class="take"><b>Pra você:</b> mostrar o momento mais curioso logo de cara e provar comida com reação sincera.</p>
+      </div>
+    </details>
+  </section>
+
   <section class="block" id="serie">
     <h2>A série</h2>
-    <p class="lead">Um episódio por cidade. Toledo, Pilsen e Bratislava são bate-voltas e rendem episódios mais curtos. Se faltar material, junto Toledo com Madri e Pilsen com Praga na edição. Por isso cada cidade é gravada como um bloco separado.</p>
+    <p class="lead">Um episódio por cidade, numerado. Toledo, Pilsen e Bratislava são bate-voltas e rendem episódios mais curtos. Se faltar material, junto Toledo com Madri e Pilsen com Praga na edição. Por isso cada cidade é gravada como um bloco separado.</p>
     <div class="table-wrap">
       <table>
-        <thead><tr><th>Ep.</th><th>Cidade</th><th>Duração</th><th>Papel na série</th></tr></thead>
+        <thead><tr><th>Ep.</th><th>Cidade</th><th>Duração</th><th>Moeda</th><th>Título sugerido</th></tr></thead>
         <tbody>
-          <tr><td class="n">01</td><td>Madri</td><td>15–20 min</td><td>Abertura da viagem</td></tr>
-          <tr><td class="n">02</td><td>Toledo</td><td>8–12 min</td><td>Bate-volta de trem</td></tr>
-          <tr><td class="n">03</td><td>Praga</td><td>15–20 min</td><td>Chegada na Europa Central</td></tr>
-          <tr><td class="n">04</td><td>Pilsen</td><td>8–12 min</td><td>Bate-volta da cerveja</td></tr>
-          <tr><td class="n">05</td><td>Viena</td><td>15–20 min</td><td>Palácios e cafés</td></tr>
-          <tr><td class="n">06</td><td>Bratislava</td><td>8–12 min</td><td>A surpresa da viagem</td></tr>
-          <tr><td class="n">07</td><td>Budapeste</td><td>15–20 min</td><td>Final da série</td></tr>
+          <tr><td class="n">01</td><td>Madri</td><td>20–30 min</td><td>Euro</td><td class="wrap-cell">MADRI: o que fazer, onde comer e quanto custa | Euro Trip #1</td></tr>
+          <tr><td class="n">02</td><td>Toledo</td><td>12–15 min</td><td>Euro</td><td class="wrap-cell">TOLEDO: a cidade medieval a 30 minutos de Madri | Euro Trip #2</td></tr>
+          <tr><td class="n">03</td><td>Praga</td><td>20–30 min</td><td>Coroa tcheca</td><td class="wrap-cell">PRAGA vale a pena? Roteiro, comida e preços | Euro Trip #3</td></tr>
+          <tr><td class="n">04</td><td>Pilsen</td><td>12–15 min</td><td>Coroa tcheca</td><td class="wrap-cell">PILSEN: provei a cerveja original direto do barril | Euro Trip #4</td></tr>
+          <tr><td class="n">05</td><td>Viena</td><td>20–30 min</td><td>Euro</td><td class="wrap-cell">VIENA: palácios, cafés e o bolo que foi parar na justiça | Euro Trip #5</td></tr>
+          <tr><td class="n">06</td><td>Bratislava</td><td>12–15 min</td><td>Euro</td><td class="wrap-cell">BRATISLAVA: a capital que quase ninguém visita | Euro Trip #6</td></tr>
+          <tr><td class="n">07</td><td>Budapeste</td><td>20–30 min</td><td>Forint</td><td class="wrap-cell">BUDAPESTE: o final da minha Euro Trip | Euro Trip #7</td></tr>
         </tbody>
       </table>
     </div>
@@ -153,13 +224,14 @@ footer { margin-top: 28px; font-size: 13px; color: var(--muted); }
 
   <section class="block" id="estrutura">
     <h2>Estrutura de cada episódio</h2>
-    <p class="lead">Grave pensando nesses seis blocos. Eu monto o episódio no Premiere nessa ordem.</p>
+    <p class="lead">Grave pensando nesses blocos. Eu monto o episódio no Premiere nessa ordem.</p>
     <ol class="flow">
-      <li><div><b>Gancho (primeiros 15 segundos)</b><span>O melhor momento do dia com uma frase forte. Pode ser gravado a qualquer hora. Cada cidade tem uma sugestão abaixo.</span></div></li>
+      <li><div><b>Gancho (do segundo zero até uns 20 segundos)</b><span>Uma promessa ou uma pergunta, gravada no lugar mais bonito do dia. Pode ser gravado a qualquer hora. Cada cidade tem uma sugestão abaixo. Logo depois entra uma vinheta de 3 segundos da série, nunca antes.</span></div></li>
       <li><div><b>Abertura</b><span>"Bom dia de Madri." Onde você está e o plano do dia em três itens.</span></div></li>
-      <li><div><b>Capítulos</b><span>De 3 a 5 lugares. Cada um com plano aberto, você no lugar, um detalhe e uma fala.</span></div></li>
-      <li><div><b>Comida</b><span>Provar e reagir de verdade. Diga o nome do prato e quanto pagou.</span></div></li>
-      <li><div><b>Reflexão</b><span>No fim do dia, sentado, um minuto sobre o que sentiu. É o que cria conexão com quem assiste.</span></div></li>
+      <li><div><b>Capítulos</b><span>Um por lugar. Cada um com plano aberto, você no lugar, um detalhe, uma fala e o preço da entrada. Entre um lugar e outro, eu monto 15 a 30 segundos só de imagem com música.</span></div></li>
+      <li><div><b>Dica prática (1 minuto)</b><span>Como se locomover, quanto custou o dia, um cuidado com segurança. É o trecho que as pessoas acham pela busca.</span></div></li>
+      <li><div><b>Comida</b><span>Provar e reagir de verdade. Diga o nome do prato e quanto pagou na moeda local. Eu coloco o valor em reais na tela.</span></div></li>
+      <li><div><b>Reflexão</b><span>No fim do dia, sentado, um minuto sobre o que sentiu. Foi o que deu mais engajamento nas referências. No episódio 1, conte por que você fez essa viagem.</span></div></li>
       <li><div><b>Encerramento e próximo episódio</b><span>"Amanhã a gente vai pra Toledo." Isso segura o público na série.</span></div></li>
     </ol>
   </section>
@@ -197,6 +269,8 @@ footer { margin-top: 28px; font-size: 13px; color: var(--muted); }
           <li><label><input type="checkbox"><span>Fala bem? Diga "essa fica!" no final. Eu procuro essa frase na transcrição do Premiere e acho as melhores falas.</span></label></li>
           <li><label><input type="checkbox"><span>Travar foco e exposição quando tiver céu muito claro no quadro</span></label></li>
           <li><label><input type="checkbox"><span>Chegar cedo nos pontos famosos (antes das 8h) para gravar sem multidão</span></label></li>
+          <li><label><input type="checkbox"><span>Falar o preço de tudo: entrada, comida, transporte, na moeda local. A conversão para reais eu faço na edição.</span></label></li>
+          <li><label><input type="checkbox"><span>Hotel: 30 segundos mostrando o quarto e a vista, e quanto custou a diária <span class="tag">opcional</span></span></label></li>
           <li><label><input type="checkbox"><span>5 fotos para a thumbnail em cada cidade: você e o cartão-postal, expressão forte e céu livre de um lado para o texto</span></label></li>
           <li><label><input type="checkbox"><span>3 tomadas verticais por cidade para Reels e TikTok: a revelação do cartão-postal, a comida e você contando uma curiosidade em 15 segundos</span></label></li>
         </ul>
@@ -224,6 +298,7 @@ footer { margin-top: 28px; font-size: 13px; color: var(--muted); }
       <summary><h3>Madri</h3><span class="meta">EP 01 · 15–20 min</span><span class="count"></span></summary>
       <div class="city-body">
         <div class="hook"><div class="label">Gancho sugerido</div><p>"Existe um ponto no chão de Madri de onde se mede todas as estradas da Espanha. E eu tô pisando nele."</p></div>
+        <div class="thumb"><div class="label">Thumbnail</div><p class="t">MADRI + "VALE A PENA?"</p><p>Você na frente do Palácio Real ou do Templo de Debod no pôr do sol, apontando pro monumento.</p></div>
         <ul class="check">
           <li><label><input type="checkbox"><span>Chegada: aeroporto, mala, primeira vista da cidade</span></label></li>
           <li><label><input type="checkbox"><span>Puerta del Sol: detalhe da placa do Km 0 no chão e a estátua do Urso e o Medronheiro</span></label></li>
@@ -247,6 +322,7 @@ footer { margin-top: 28px; font-size: 13px; color: var(--muted); }
       <summary><h3>Toledo</h3><span class="meta">EP 02 · 8–12 min · bate-volta</span><span class="count"></span></summary>
       <div class="city-body">
         <div class="hook"><div class="label">Gancho sugerido</div><p>"A meia hora de trem de Madri tem uma cidade que parece que parou no tempo."</p></div>
+        <div class="thumb"><div class="label">Thumbnail</div><p class="t">TOLEDO + "PAROU NO TEMPO"</p><p>Você no Mirador del Valle com a cidade inteira atrás, braços abertos.</p></div>
         <ul class="check">
           <li><label><input type="checkbox"><span>Deslocamento: trem saindo da estação de Atocha <em>(cerca de 33 min)</em>, plano da janela</span></label></li>
           <li><label><input type="checkbox"><span>Chegada: fachada da estação de Toledo, que já é um cartão-postal</span></label></li>
@@ -270,6 +346,7 @@ footer { margin-top: 28px; font-size: 13px; color: var(--muted); }
       <summary><h3>Praga</h3><span class="meta">EP 03 · 15–20 min</span><span class="count"></span></summary>
       <div class="city-body">
         <div class="hook"><div class="label">Gancho sugerido</div><p>"Seis da manhã na Ponte Carlos. Daqui a três horas não dá nem pra andar aqui."</p></div>
+        <div class="thumb"><div class="label">Thumbnail</div><p class="t">PRAGA + "VAZIA ÀS 6H DA MANHÃ"</p><p>Você na Ponte Carlos ao amanhecer, com o castelo ao fundo.</p></div>
         <ul class="check">
           <li><label><input type="checkbox"><span>Deslocamento: voo Madri › Praga, janela do avião e pouso</span></label></li>
           <li><label><input type="checkbox"><span>Ponte Carlos ao amanhecer, vazia antes das 7h. Esse é o plano do episódio.</span></label></li>
@@ -294,6 +371,7 @@ footer { margin-top: 28px; font-size: 13px; color: var(--muted); }
       <summary><h3>Pilsen</h3><span class="meta">EP 04 · 8–12 min · bate-volta</span><span class="count"></span></summary>
       <div class="city-body">
         <div class="hook"><div class="label">Gancho sugerido</div><p>"Toda cerveja pilsen do mundo leva o nome dessa cidade. Eu vim conhecer a original."</p></div>
+        <div class="thumb"><div class="label">Thumbnail</div><p class="t">PILSEN + "A ORIGINAL"</p><p>Você erguendo o copo de cerveja não filtrada dentro da adega.</p></div>
         <ul class="check">
           <li><label><input type="checkbox"><span>Deslocamento: trem saindo de Praga <em>(cerca de 1h30)</em></span></label></li>
           <li><label><input type="checkbox"><span>Portão da cervejaria Pilsner Urquell: revelação</span></label></li>
@@ -314,6 +392,7 @@ footer { margin-top: 28px; font-size: 13px; color: var(--muted); }
       <summary><h3>Viena</h3><span class="meta">EP 05 · 15–20 min</span><span class="count"></span></summary>
       <div class="city-body">
         <div class="hook"><div class="label">Gancho sugerido</div><p>"Viena tem um bolo tão famoso que já virou briga na justiça. Hoje eu vou provar."</p></div>
+        <div class="thumb"><div class="label">Thumbnail</div><p class="t">VIENA + "O BOLO DA BRIGA"</p><p>Você segurando o prato com a Sachertorte, e o palácio ou a catedral ao fundo.</p></div>
         <ul class="check">
           <li><label><input type="checkbox"><span>Deslocamento: trem para Viena, plano da janela e chegada na estação</span></label></li>
           <li><label><input type="checkbox"><span>Catedral de Santo Estêvão: subir na torre e gravar o telhado colorido de perto</span></label></li>
@@ -337,6 +416,7 @@ footer { margin-top: 28px; font-size: 13px; color: var(--muted); }
       <summary><h3>Bratislava</h3><span class="meta">EP 06 · 8–12 min</span><span class="count"></span></summary>
       <div class="city-body">
         <div class="hook"><div class="label">Gancho sugerido</div><p>"Tem um homem saindo do bueiro no meio de Bratislava. E ele tá lá desde 1997."</p></div>
+        <div class="thumb"><div class="label">Thumbnail</div><p class="t">BRATISLAVA + "SUBESTIMADA"</p><p>Você agachado ao lado do Čumil, o homem do bueiro, com cara de surpresa.</p></div>
         <ul class="check">
           <li><label><input type="checkbox"><span>Deslocamento: trem de Viena <em>(cerca de 1h)</em> ou barco pelo Danúbio <em>(confira se está operando na data)</em>. O barco rende imagens lindas.</span></label></li>
           <li><label><input type="checkbox"><span>Castelo de Bratislava: o castelo branco de quatro torres, com o Danúbio de fundo</span></label></li>
@@ -356,6 +436,7 @@ footer { margin-top: 28px; font-size: 13px; color: var(--muted); }
       <summary><h3>Budapeste</h3><span class="meta">EP 07 · 15–20 min · final da série</span><span class="count"></span></summary>
       <div class="city-body">
         <div class="hook"><div class="label">Gancho sugerido</div><p>"Esse é o prédio mais bonito que eu vi na viagem inteira. Por isso eu deixei ele pro último episódio."</p></div>
+        <div class="thumb"><div class="label">Thumbnail</div><p class="t">BUDAPESTE + "O MAIS LINDO DA VIAGEM"</p><p>Você com o Parlamento iluminado atrás, à noite, do outro lado do rio.</p></div>
         <ul class="check">
           <li><label><input type="checkbox"><span>Deslocamento: trem de Bratislava <em>(cerca de 2h30)</em></span></label></li>
           <li><label><input type="checkbox"><span>Parlamento visto do outro lado do rio <em>(Batthyány tér)</em>, de dia e iluminado à noite</span></label></li>
@@ -375,6 +456,29 @@ footer { margin-top: 28px; font-size: 13px; color: var(--muted); }
         <div class="note"><div class="label">Atenção</div>Os Sapatos no Danúbio são um memorial às vítimas do Holocausto. Sem pose e sem trend. Na edição, esse trecho entra sem música animada. Nas termas, não filme outras pessoas de perto.</div>
       </div>
     </details>
+  </section>
+
+  <section class="block" id="edicao">
+    <h2>Padrão de edição no Premiere</h2>
+    <p class="lead">Vale para os sete episódios, para a série ter cara de série.</p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Item</th><th>Padrão</th></tr></thead>
+        <tbody>
+          <tr><td>Sequência</td><td class="wrap-cell">4K, na mesma taxa de quadros do celular (30 fps). Proxies leves para editar sem travar.</td></tr>
+          <tr><td>Trilhas de vídeo</td><td class="wrap-cell">V1 falas · V2 imagens de apoio · V3 textos e preços · V4 mapa e cartelas</td></tr>
+          <tr><td>Trilhas de áudio</td><td class="wrap-cell">A1 voz da lapela · A2 som ambiente · A3 música · A4 efeitos</td></tr>
+          <tr><td>Primeiro corte</td><td class="wrap-cell">Transcrever no Premiere e buscar "essa fica" para achar as melhores falas</td></tr>
+          <tr><td>Abertura</td><td class="wrap-cell">Gancho no segundo zero e depois vinheta de 3 segundos com o mapa da rota avançando até a cidade do episódio</td></tr>
+          <tr><td>Ritmo</td><td class="wrap-cell">Fala cortada sem pausas mortas. Uma montagem só com imagem e música de 15 a 30 segundos a cada troca de lugar.</td></tr>
+          <tr><td>Textos na tela</td><td class="wrap-cell">Nome do lugar ao chegar, e preço em moeda local e em reais. Sem legenda corrida no vídeo longo.</td></tr>
+          <tr><td>Áudio</td><td class="wrap-cell">Volume final perto de −14 LUFS, o padrão do YouTube. A música abaixa sozinha quando você fala (ducking).</td></tr>
+          <tr><td>Cor</td><td class="wrap-cell">Uma camada de ajuste com o mesmo look em todos os episódios</td></tr>
+          <tr><td>Capítulos</td><td class="wrap-cell">Um capítulo por lugar, na descrição do vídeo</td></tr>
+          <tr><td>Final</td><td class="wrap-cell">Chamada para o próximo episódio e tela final apontando para ele</td></tr>
+        </tbody>
+      </table>
+    </div>
   </section>
 
   <section class="block" id="fimdodia">
@@ -400,7 +504,7 @@ footer { margin-top: 28px; font-size: 13px; color: var(--muted); }
     <span id="confirm" hidden>Tem certeza? <button type="button" class="danger" id="reset-yes">Sim, limpar</button> <button type="button" id="reset-no">Cancelar</button></span>
   </div>
 
-  <footer>Versão 1. Depois que eu analisar os vlogs de referência, ajusto ritmo e estrutura aqui.</footer>
+  <footer>Versão 2 · outubro de 2026. Ajustada a partir de Estevam Pelo Mundo, Mapa Carimbado, Emilim Schmitz, Um Casal de Amigos Meu e Mundo Sem Fim.</footer>
 </main>
 
 <script>
