@@ -13,6 +13,16 @@ const CENTRO_ROTA = { x: 991, y: 405 };
 const ESCALA_GERAL = 1.15;
 const ESCALA_CIDADE = 2.6;
 
+// De onde sai cada trecho. Toledo e Pilsen são bate-voltas, então saem da cidade-base.
+const ORIGEM: Record<string, string> = {
+  toledo: "madri",
+  praga: "madri",
+  pilsen: "praga",
+  viena: "praga",
+  bratislava: "viena",
+  budapeste: "bratislava",
+};
+
 const curva = (a: { x: number; y: number }, b: { x: number; y: number }) => {
   const mx = (a.x + b.x) / 2;
   const my = (a.y + b.y) / 2;
@@ -83,7 +93,8 @@ export const Vinheta: React.FC<z.infer<typeof vinhetaSchema>> = ({ cidade }) => 
 
           {CIDADES.slice(1).map((c, i) => {
             const trecho = i + 1;
-            const d = curva(CIDADES[i], c);
+            const origem = CIDADES.find((o) => o.id === ORIGEM[c.id]) ?? CIDADES[i];
+            const d = curva(origem, c);
             if (trecho > atual.indice) {
               return (
                 <path
@@ -105,8 +116,7 @@ export const Vinheta: React.FC<z.infer<typeof vinhetaSchema>> = ({ cidade }) => 
                 pathLength={1}
                 fill="none"
                 stroke={COR.dourado}
-                strokeWidth={4}
-                vectorEffect="non-scaling-stroke"
+                strokeWidth={r(4)}
                 strokeLinecap="round"
                 strokeDasharray={1}
                 strokeDashoffset={trecho === atual.indice ? trechoNovo : 0}

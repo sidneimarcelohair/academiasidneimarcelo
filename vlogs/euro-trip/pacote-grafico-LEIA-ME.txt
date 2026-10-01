@@ -1,0 +1,31 @@
+EURO TRIP · PACOTE GRÁFICO PARA O PREMIERE
+Academia Sidnei Marcelo · outubro de 2026
+
+Todos os arquivos estão em 4K (3840x2160), a 30 fps.
+
+VINHETAS (pasta vinhetas, MP4, 4 segundos)
+Entram logo depois do gancho de cada episódio. O mapa mostra a rota
+até ali, desenha o trecho novo e aproxima na cidade do episódio.
+Uma por episódio: EP01 Madri até EP07 Budapeste.
+
+CARTELAS (pasta cartelas, MOV com fundo transparente, 4 segundos)
+Nome da cidade sobre o primeiro plano aberto do episódio.
+Coloque na trilha V3, acima do vídeo.
+
+NOME DO LUGAR (pasta lugares, MOV transparente, 4 segundos)
+Entra quando você chega num lugar. Aqui vai um exemplo (Ponte Carlos).
+Os outros eu gero a partir das suas anotações do dia.
+
+ETIQUETA DE PREÇO (pasta precos, MOV transparente, 3,5 segundos)
+Preço na moeda local e o valor aproximado em reais. Aqui vai um exemplo
+(churros) com valor ilustrativo. As etiquetas de verdade eu gero com os
+preços que você anotar.
+
+COMO USAR
+1. Arraste a pasta inteira para o painel Projeto do Premiere.
+2. Sequência em 4K e 30 fps: os arquivos entram no tamanho certo, sem
+   precisar redimensionar.
+3. Os MOV transparentes vão numa trilha acima do vídeo. O fundo já sai
+   transparente.
+4. Se o Premiere não abrir algum MOV transparente, me avise que eu
+   exporto em ProRes 4444 (arquivo maior, mas aceito em qualquer versão).

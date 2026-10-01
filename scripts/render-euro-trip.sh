@@ -13,7 +13,7 @@ mkdir -p "$OUT"/vinhetas "$OUT"/cartelas "$OUT"/lugares "$OUT"/precos
 slug() { echo "$1" | iconv -f utf8 -t ascii//TRANSLIT | tr '[:upper:]' '[:lower:]' | sed 's/[^a-z0-9]\+/-/g; s/^-//; s/-$//'; }
 
 transparente() { # composição, props json, arquivo final
-  local tmp; tmp=$(mktemp -d)
+  local tmp="$OUT/tmp-frames-$RANDOM"
   npx remotion render "$1" "$tmp" --sequence --image-format=png --scale=2 --props="$2" --log=error
   ffmpeg -loglevel error -y -framerate 30 -i "$tmp/element-%03d.png" -c:v png -pix_fmt rgba "$3"
   rm -rf "$tmp"
