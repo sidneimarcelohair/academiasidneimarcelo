@@ -1,0 +1,462 @@
+<title>Euro Trip · Roteiro de Gravação</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600&family=Montserrat:wght@400;500;600&display=swap">
+<style>
+/* Layout: caderno de campo de uma coluna para o celular; navegação fixa pela rota, uma ficha por cidade com checklist. */
+:root {
+  --bg: #F2F4F8;
+  --surface: #FFFFFF;
+  --ink: #0A1A38;
+  --muted: #56627A;
+  --line: #D9DFEA;
+  --accent: #9A7434;
+  --accent-soft: #F3EBDD;
+  --hero-bg: #0A1A38;
+  --hero-fg: #FFFFFF;
+  --hero-muted: #C9D4E8;
+  --warn: #9B3B2E;
+  --warn-soft: #F7E7E3;
+  --done: #2F6B4F;
+  --display: "Cinzel", "Trajan Pro", Georgia, serif;
+  --body: "Montserrat", "Helvetica Neue", Arial, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #07112A; --surface: #0E1D3F; --ink: #E7ECF5; --muted: #9DAAC4; --line: #213560;
+    --accent: #D2AE6C; --accent-soft: #2A2A2E; --hero-bg: #0E1D3F; --hero-fg: #FFFFFF; --hero-muted: #C9D4E8;
+    --warn: #E79A8C; --warn-soft: #3A1F25; --done: #7CC8A2; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #07112A; --surface: #0E1D3F; --ink: #E7ECF5; --muted: #9DAAC4; --line: #213560;
+  --accent: #D2AE6C; --accent-soft: #2A2A2E; --hero-bg: #0E1D3F; --hero-fg: #FFFFFF; --hero-muted: #C9D4E8;
+  --warn: #E79A8C; --warn-soft: #3A1F25; --done: #7CC8A2; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--ink); font-family: var(--body); font-size: 15px; line-height: 1.55; }
+.wrap { max-width: 720px; margin: 0 auto; padding-inline: 16px; padding-block: 0 48px; }
+h1, h2, h3 { font-family: var(--display); font-weight: 600; text-wrap: balance; margin: 0; letter-spacing: 0.04em; }
+p { margin: 0; }
+
+.hero { background: var(--hero-bg); color: var(--hero-fg); padding-inline: 16px; padding-block: 28px 22px; }
+.hero-in { max-width: 720px; margin: 0 auto; display: grid; gap: 10px; }
+.eyebrow { font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--hero-muted); font-weight: 600; }
+.hero h1 { font-size: clamp(26px, 7vw, 38px); line-height: 1.15; }
+.hero p { color: var(--hero-muted); max-width: 60ch; }
+.progress { display: flex; align-items: center; gap: 12px; margin-top: 6px; font-size: 13px; color: var(--hero-muted); font-variant-numeric: tabular-nums; }
+.bar { flex: 1; height: 6px; border-radius: 3px; background: rgba(255,255,255,0.15); overflow: hidden; }
+.bar span { display: block; height: 100%; width: 0; background: var(--accent); transition: width .3s; }
+
+nav.route { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: var(--bg); border-bottom: 1px solid var(--line); }
+.route-in { max-width: 720px; margin: 0 auto; padding-inline: 16px; padding-block: 10px; overflow-x: auto; display: flex; gap: 6px; align-items: center; scrollbar-width: none; }
+.route-in::-webkit-scrollbar { display: none; }
+.route a { flex: none; text-decoration: none; color: var(--ink); font-size: 13px; font-weight: 500; padding: 6px 11px; border: 1px solid var(--line); border-radius: 999px; background: var(--surface); white-space: nowrap; }
+.route a:focus-visible, summary:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.route .sep { color: var(--muted); font-size: 12px; flex: none; }
+.route a.base { border-style: dashed; }
+
+section.block { margin-top: 28px; display: grid; gap: 12px; }
+.block > h2 { font-size: 20px; }
+.lead { color: var(--muted); max-width: 62ch; }
+
+details.city { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; scroll-margin-top: 64px; }
+details.city + details.city { margin-top: 10px; }
+summary { list-style: none; cursor: pointer; padding: 14px 16px; display: grid; grid-template-columns: 1fr auto; gap: 2px 12px; align-items: center; }
+summary::-webkit-details-marker { display: none; }
+summary h3 { font-size: 19px; }
+.meta { font-size: 12px; color: var(--muted); letter-spacing: 0.04em; grid-column: 1; }
+.count { grid-row: 1 / span 2; grid-column: 2; font-size: 13px; font-weight: 600; font-variant-numeric: tabular-nums; color: var(--muted); }
+.count.full { color: var(--done); }
+.city-body { padding: 0 16px 16px; display: grid; gap: 14px; }
+
+.hook { background: var(--accent-soft); border-radius: 8px; padding: 12px 14px; display: grid; gap: 4px; }
+.label { font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 600; color: var(--accent); }
+.hook p { font-size: 16px; font-weight: 500; }
+.note { border-left: 3px solid var(--warn); background: var(--warn-soft); padding: 10px 12px; border-radius: 0 8px 8px 0; font-size: 14px; }
+.note .label { color: var(--warn); }
+.fact { font-size: 14px; color: var(--muted); }
+.fact b { color: var(--ink); font-weight: 600; }
+
+ul.check { list-style: none; margin: 0; padding: 0; display: grid; }
+ul.check li { border-top: 1px solid var(--line); }
+ul.check li:first-child { border-top: 0; }
+ul.check label { display: grid; grid-template-columns: 22px 1fr; gap: 10px; padding: 9px 0; cursor: pointer; align-items: start; }
+ul.check input { width: 18px; height: 18px; margin: 2px 0 0; accent-color: var(--accent); }
+ul.check input:checked + span { color: var(--muted); text-decoration: line-through; text-decoration-color: var(--line); }
+ul.check em { font-style: normal; color: var(--muted); font-size: 13px; }
+.tag { display: inline-block; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 600; padding: 1px 6px; border-radius: 4px; border: 1px solid var(--accent); color: var(--accent); margin-left: 4px; vertical-align: 1px; }
+
+ol.flow { margin: 0; padding: 0; list-style: none; display: grid; gap: 8px; counter-reset: s; }
+ol.flow li { counter-increment: s; display: grid; grid-template-columns: 30px 1fr; gap: 10px; background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px; }
+ol.flow li::before { content: counter(s); font-family: var(--display); font-weight: 600; font-size: 18px; color: var(--accent); }
+ol.flow b { display: block; }
+ol.flow span { color: var(--muted); font-size: 14px; }
+
+.table-wrap { overflow-x: auto; background: var(--surface); border: 1px solid var(--line); border-radius: 8px; }
+table { border-collapse: collapse; width: 100%; font-size: 14px; }
+th, td { text-align: left; padding: 9px 12px; border-bottom: 1px solid var(--line); white-space: nowrap; }
+th { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
+tr:last-child td { border-bottom: 0; }
+td.n { font-family: var(--display); font-weight: 600; color: var(--accent); }
+
+.reset { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; margin-top: 28px; font-size: 13px; color: var(--muted); }
+button { font: inherit; font-size: 13px; padding: 7px 12px; border-radius: 6px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); cursor: pointer; }
+button.danger { border-color: var(--warn); color: var(--warn); }
+footer { margin-top: 28px; font-size: 13px; color: var(--muted); }
+@media (prefers-reduced-motion: reduce) { .bar span { transition: none; } }
+</style>
+
+<header class="hero">
+  <div class="hero-in">
+    <div class="eyebrow">Sidnei Marcelo Hair · Vlog de viagem · Outubro 2026</div>
+    <h1>Euro Trip · Roteiro de Gravação</h1>
+    <p>Sete cidades, uma série no YouTube. Marque cada tomada quando gravar. As marcações ficam salvas neste aparelho.</p>
+    <div class="progress"><div class="bar"><span id="bar"></span></div><span id="total">0 de 0 itens</span></div>
+  </div>
+</header>
+
+<nav class="route" aria-label="Rota">
+  <div class="route-in">
+    <a class="base" href="#base">Antes de gravar</a>
+    <a href="#madri">Madri</a><span class="sep">→</span>
+    <a href="#toledo">Toledo</a><span class="sep">→</span>
+    <a href="#praga">Praga</a><span class="sep">→</span>
+    <a href="#pilsen">Pilsen</a><span class="sep">→</span>
+    <a href="#viena">Viena</a><span class="sep">→</span>
+    <a href="#bratislava">Bratislava</a><span class="sep">→</span>
+    <a href="#budapeste">Budapeste</a>
+    <a class="base" href="#fimdodia">Fim do dia</a>
+  </div>
+</nav>
+
+<main class="wrap">
+
+  <section class="block" id="serie">
+    <h2>A série</h2>
+    <p class="lead">Um episódio por cidade. Toledo, Pilsen e Bratislava são bate-voltas e rendem episódios mais curtos. Se faltar material, junto Toledo com Madri e Pilsen com Praga na edição. Por isso cada cidade é gravada como um bloco separado.</p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Ep.</th><th>Cidade</th><th>Duração</th><th>Papel na série</th></tr></thead>
+        <tbody>
+          <tr><td class="n">01</td><td>Madri</td><td>15–20 min</td><td>Abertura da viagem</td></tr>
+          <tr><td class="n">02</td><td>Toledo</td><td>8–12 min</td><td>Bate-volta de trem</td></tr>
+          <tr><td class="n">03</td><td>Praga</td><td>15–20 min</td><td>Chegada na Europa Central</td></tr>
+          <tr><td class="n">04</td><td>Pilsen</td><td>8–12 min</td><td>Bate-volta da cerveja</td></tr>
+          <tr><td class="n">05</td><td>Viena</td><td>15–20 min</td><td>Palácios e cafés</td></tr>
+          <tr><td class="n">06</td><td>Bratislava</td><td>8–12 min</td><td>A surpresa da viagem</td></tr>
+          <tr><td class="n">07</td><td>Budapeste</td><td>15–20 min</td><td>Final da série</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="block" id="estrutura">
+    <h2>Estrutura de cada episódio</h2>
+    <p class="lead">Grave pensando nesses seis blocos. Eu monto o episódio no Premiere nessa ordem.</p>
+    <ol class="flow">
+      <li><div><b>Gancho (primeiros 15 segundos)</b><span>O melhor momento do dia com uma frase forte. Pode ser gravado a qualquer hora. Cada cidade tem uma sugestão abaixo.</span></div></li>
+      <li><div><b>Abertura</b><span>"Bom dia de Madri." Onde você está e o plano do dia em três itens.</span></div></li>
+      <li><div><b>Capítulos</b><span>De 3 a 5 lugares. Cada um com plano aberto, você no lugar, um detalhe e uma fala.</span></div></li>
+      <li><div><b>Comida</b><span>Provar e reagir de verdade. Diga o nome do prato e quanto pagou.</span></div></li>
+      <li><div><b>Reflexão</b><span>No fim do dia, sentado, um minuto sobre o que sentiu. É o que cria conexão com quem assiste.</span></div></li>
+      <li><div><b>Encerramento e próximo episódio</b><span>"Amanhã a gente vai pra Toledo." Isso segura o público na série.</span></div></li>
+    </ol>
+  </section>
+
+  <section class="block" id="base">
+    <h2>Antes de gravar</h2>
+
+    <details class="city" data-sec="kit" open>
+      <summary><h3>Kit e configuração</h3><span class="meta">Conferir antes do embarque</span><span class="count"></span></summary>
+      <div class="city-body">
+        <ul class="check">
+          <li><label><input type="checkbox"><span>Microfone sem fio de lapela, com protetor de vento (o "pelinho"). Na rua o vento estraga o áudio.</span></label></li>
+          <li><label><input type="checkbox"><span>Gimbal ou estabilização do celular ligada</span></label></li>
+          <li><label><input type="checkbox"><span>Mini tripé para se gravar em plano aberto e fazer time-lapse</span></label></li>
+          <li><label><input type="checkbox"><span>Power bank, cabos e adaptador de tomada padrão europeu (tipo C/F)</span></label></li>
+          <li><label><input type="checkbox"><span>HD externo ou SSD para backup diário, e espaço livre no celular</span></label></li>
+          <li><label><input type="checkbox"><span>Horizontal, 4K a 30 fps para tudo que é fala e cena comum</span></label></li>
+          <li><label><input type="checkbox"><span>4K a 60 fps só para cenas de movimento que vão virar câmera lenta <em>(caminhada, bonde, rio, pássaros)</em></span></label></li>
+          <li><label><input type="checkbox"><span>Se for iPhone: desligar o Vídeo HDR <em>(Ajustes › Câmera › Gravar Vídeo)</em>. As cores ficam iguais entre os clipes no Premiere.</span></label></li>
+          <li><label><input type="checkbox"><span>Não trocar a configuração no meio da viagem. Misturar 24, 25 e 30 fps dá trabalho na edição.</span></label></li>
+        </ul>
+      </div>
+    </details>
+
+    <details class="city" data-sec="regras">
+      <summary><h3>Regras de toda cena</h3><span class="meta">Vale para as sete cidades</span><span class="count"></span></summary>
+      <div class="city-body">
+        <ul class="check">
+          <li><label><input type="checkbox"><span>Limpar a lente antes de gravar</span></label></li>
+          <li><label><input type="checkbox"><span>Segurar cada plano 10 segundos parado, no começo e no fim. É o que me deixa cortar limpo.</span></label></li>
+          <li><label><input type="checkbox"><span>Trio de planos em cada lugar: aberto (onde estou), médio (eu no lugar) e detalhe (placa, textura, comida, mãos)</span></label></li>
+          <li><label><input type="checkbox"><span>Uma revelação: começar num detalhe ou no chão e subir mostrando o monumento</span></label></li>
+          <li><label><input type="checkbox"><span>Uma tomada caminhando, com a câmera seguindo você ou o caminho</span></label></li>
+          <li><label><input type="checkbox"><span>10 segundos de som ambiente sem falar: sinos, rua, rio. Vira o som da cena.</span></label></li>
+          <li><label><input type="checkbox"><span>Fala bem? Diga "essa fica!" no final. Eu procuro essa frase na transcrição do Premiere e acho as melhores falas.</span></label></li>
+          <li><label><input type="checkbox"><span>Travar foco e exposição quando tiver céu muito claro no quadro</span></label></li>
+          <li><label><input type="checkbox"><span>Chegar cedo nos pontos famosos (antes das 8h) para gravar sem multidão</span></label></li>
+          <li><label><input type="checkbox"><span>5 fotos para a thumbnail em cada cidade: você e o cartão-postal, expressão forte e céu livre de um lado para o texto</span></label></li>
+          <li><label><input type="checkbox"><span>3 tomadas verticais por cidade para Reels e TikTok: a revelação do cartão-postal, a comida e você contando uma curiosidade em 15 segundos</span></label></li>
+        </ul>
+        <div class="note"><div class="label">Atenção</div>Drone é proibido ou exige autorização nos centros históricos dessas cidades. Em termas, igrejas e memoriais, não filme pessoas de perto.</div>
+        <div class="note"><div class="label">Luz de outubro</div>Na Europa Central escurece cedo. Em 25/10 o relógio atrasa uma hora e o sol passa a se pôr perto das 16h30–17h. Confira o horário do pôr do sol no dia e planeje as tomadas de fim de tarde.</div>
+      </div>
+    </details>
+
+    <details class="city" data-sec="quadro">
+      <summary><h3>Quadro opcional: Olhar de Cabeleireiro</h3><span class="meta">30 segundos por cidade</span><span class="count"></span></summary>
+      <div class="city-body">
+        <p class="fact">Mesmo sem trabalhar, o seu público é de cabeleireiros. Um quadro curto e fixo em cada episódio cria assinatura na série: que cores, cortes e mechas você está vendo nas ruas daquela cidade.</p>
+        <ul class="check">
+          <li><label><input type="checkbox"><span>Gravar a fala sentado num café ou numa praça, sem filmar ninguém de perto</span></label></li>
+          <li><label><input type="checkbox"><span>Uma tendência por cidade, com a sua leitura técnica <em>(tom, reflexo, técnica)</em></span></label></li>
+        </ul>
+      </div>
+    </details>
+  </section>
+
+  <section class="block" id="cidades">
+    <h2>Cidades</h2>
+
+    <details class="city" id="madri" data-sec="madri">
+      <summary><h3>Madri</h3><span class="meta">EP 01 · 15–20 min</span><span class="count"></span></summary>
+      <div class="city-body">
+        <div class="hook"><div class="label">Gancho sugerido</div><p>"Existe um ponto no chão de Madri de onde se mede todas as estradas da Espanha. E eu tô pisando nele."</p></div>
+        <ul class="check">
+          <li><label><input type="checkbox"><span>Chegada: aeroporto, mala, primeira vista da cidade</span></label></li>
+          <li><label><input type="checkbox"><span>Puerta del Sol: detalhe da placa do Km 0 no chão e a estátua do Urso e o Medronheiro</span></label></li>
+          <li><label><input type="checkbox"><span>Plaza Mayor: plano aberto parado e você atravessando a praça</span></label></li>
+          <li><label><input type="checkbox"><span>Mercado de San Miguel: tapas, provar e reagir</span></label></li>
+          <li><label><input type="checkbox"><span>Bocadillo de calamares, o sanduíche de lula clássico perto da Plaza Mayor</span></label></li>
+          <li><label><input type="checkbox"><span>Palácio Real e Catedral de la Almudena: revelação</span></label></li>
+          <li><label><input type="checkbox"><span>Templo de Debod no pôr do sol: time-lapse com o mini tripé</span></label></li>
+          <li><label><input type="checkbox"><span>Parque do Retiro: lago dos barquinhos e Palácio de Cristal</span></label></li>
+          <li><label><input type="checkbox"><span>Vista do terraço do Círculo de Bellas Artes <em>(entrada paga)</em></span></label></li>
+          <li><label><input type="checkbox"><span>Gran Vía à noite: Edifício Metrópolis iluminado, cena em movimento</span></label></li>
+          <li><label><input type="checkbox"><span>Churros com chocolate na Chocolatería San Ginés</span></label></li>
+          <li><label><input type="checkbox"><span>Reflexão do dia e chamada: "Amanhã: Toledo"</span></label></li>
+        </ul>
+        <p class="fact"><b>Curiosidade para contar:</b> o Templo de Debod é um templo egípcio verdadeiro, com mais de 2.000 anos, que o Egito deu de presente para a Espanha.</p>
+        <div class="note"><div class="label">Atenção</div>O Museu do Prado não permite filmar nem fotografar lá dentro. Grave só a fachada.</div>
+      </div>
+    </details>
+
+    <details class="city" id="toledo" data-sec="toledo">
+      <summary><h3>Toledo</h3><span class="meta">EP 02 · 8–12 min · bate-volta</span><span class="count"></span></summary>
+      <div class="city-body">
+        <div class="hook"><div class="label">Gancho sugerido</div><p>"A meia hora de trem de Madri tem uma cidade que parece que parou no tempo."</p></div>
+        <ul class="check">
+          <li><label><input type="checkbox"><span>Deslocamento: trem saindo da estação de Atocha <em>(cerca de 33 min)</em>, plano da janela</span></label></li>
+          <li><label><input type="checkbox"><span>Chegada: fachada da estação de Toledo, que já é um cartão-postal</span></label></li>
+          <li><label><input type="checkbox"><span>Mirador del Valle: a cidade inteira num quadro. Panorâmica lenta e fotos para a thumbnail.</span></label></li>
+          <li><label><input type="checkbox"><span>Ponte de San Martín sobre o rio Tejo</span></label></li>
+          <li><label><input type="checkbox"><span>Ruelas estreitas: caminhada com a câmera seguindo, detalhes de portas e janelas</span></label></li>
+          <li><label><input type="checkbox"><span>Escadas rolantes que sobem a colina: tomada divertida</span></label></li>
+          <li><label><input type="checkbox"><span>Catedral Primada: fachada e torre</span></label></li>
+          <li><label><input type="checkbox"><span>Alcázar visto de baixo</span></label></li>
+          <li><label><input type="checkbox"><span>Sinagoga de Santa María la Blanca</span></label></li>
+          <li><label><input type="checkbox"><span>Loja de espadas e de damasquinado <em>(ouro aplicado sobre aço)</em>: detalhe das peças</span></label></li>
+          <li><label><input type="checkbox"><span>Mazapán de Toledo: provar e reagir</span></label></li>
+          <li><label><input type="checkbox"><span>Tirolesa sobre o rio Tejo <span class="tag">opcional</span></span></label></li>
+          <li><label><input type="checkbox"><span>Chamada: "Agora a gente troca de país. Próxima parada: Praga"</span></label></li>
+        </ul>
+        <p class="fact"><b>Curiosidade para contar:</b> Toledo é chamada de cidade das três culturas, porque cristãos, judeus e muçulmanos conviveram aqui por séculos.</p>
+      </div>
+    </details>
+
+    <details class="city" id="praga" data-sec="praga">
+      <summary><h3>Praga</h3><span class="meta">EP 03 · 15–20 min</span><span class="count"></span></summary>
+      <div class="city-body">
+        <div class="hook"><div class="label">Gancho sugerido</div><p>"Seis da manhã na Ponte Carlos. Daqui a três horas não dá nem pra andar aqui."</p></div>
+        <ul class="check">
+          <li><label><input type="checkbox"><span>Deslocamento: voo Madri › Praga, janela do avião e pouso</span></label></li>
+          <li><label><input type="checkbox"><span>Ponte Carlos ao amanhecer, vazia antes das 7h. Esse é o plano do episódio.</span></label></li>
+          <li><label><input type="checkbox"><span>Relógio Astronômico batendo a hora: chegue 5 minutos antes e grave o show e a multidão</span></label></li>
+          <li><label><input type="checkbox"><span>Praça da Cidade Velha e Igreja de Týn: plano aberto parado</span></label></li>
+          <li><label><input type="checkbox"><span>Castelo de Praga e Catedral de São Vito: vitrais por dentro</span></label></li>
+          <li><label><input type="checkbox"><span>Malá Strana: ruas de pedra e telhados laranjas</span></label></li>
+          <li><label><input type="checkbox"><span>Muro de John Lennon</span></label></li>
+          <li><label><input type="checkbox"><span>Cabeça giratória de Franz Kafka, do artista David Černý: grave ela se montando</span></label></li>
+          <li><label><input type="checkbox"><span>Casa Dançante</span></label></li>
+          <li><label><input type="checkbox"><span>Parque Letná: as pontes em sequência, com uma cerveja no beer garden</span></label></li>
+          <li><label><input type="checkbox"><span>Passeio de barco no rio Vltava</span></label></li>
+          <li><label><input type="checkbox"><span>Comida: svíčková <em>(carne com molho cremoso e knedlíky)</em> ou goulash no pão</span></label></li>
+          <li><label><input type="checkbox"><span>Trdelník: provar e contar a curiosidade abaixo</span></label></li>
+          <li><label><input type="checkbox"><span>Reflexão do dia e chamada: "Amanhã: a cidade que deu nome à cerveja"</span></label></li>
+        </ul>
+        <p class="fact"><b>Curiosidade para contar:</b> o trdelník é vendido em toda esquina como "doce tradicional tcheco", mas virou moda pelo turismo. Esse tipo de verdade costuma render comentário.</p>
+      </div>
+    </details>
+
+    <details class="city" id="pilsen" data-sec="pilsen">
+      <summary><h3>Pilsen</h3><span class="meta">EP 04 · 8–12 min · bate-volta</span><span class="count"></span></summary>
+      <div class="city-body">
+        <div class="hook"><div class="label">Gancho sugerido</div><p>"Toda cerveja pilsen do mundo leva o nome dessa cidade. Eu vim conhecer a original."</p></div>
+        <ul class="check">
+          <li><label><input type="checkbox"><span>Deslocamento: trem saindo de Praga <em>(cerca de 1h30)</em></span></label></li>
+          <li><label><input type="checkbox"><span>Portão da cervejaria Pilsner Urquell: revelação</span></label></li>
+          <li><label><input type="checkbox"><span>Tour da cervejaria: as adegas subterrâneas</span></label></li>
+          <li><label><input type="checkbox"><span>Cerveja não filtrada servida direto do barril de carvalho: o momento do episódio. Reação de verdade.</span></label></li>
+          <li><label><input type="checkbox"><span>Praça da República, uma das maiores praças da Europa Central: plano aberto</span></label></li>
+          <li><label><input type="checkbox"><span>Catedral de São Bartolomeu: subir a torre e gravar a vista</span></label></li>
+          <li><label><input type="checkbox"><span>Grande Sinagoga: fachada</span></label></li>
+          <li><label><input type="checkbox"><span>Túneis subterrâneos históricos da cidade <span class="tag">opcional</span></span></label></li>
+          <li><label><input type="checkbox"><span>Chamada: "Próxima parada: Viena"</span></label></li>
+        </ul>
+        <p class="fact"><b>Curiosidade para contar:</b> a primeira cerveja do estilo pilsner nasceu aqui em 1842. A torre da catedral é a mais alta de uma igreja na República Tcheca.</p>
+        <div class="note"><div class="label">Atenção</div>No tour, confirme com o guia em quais partes pode filmar.</div>
+      </div>
+    </details>
+
+    <details class="city" id="viena" data-sec="viena">
+      <summary><h3>Viena</h3><span class="meta">EP 05 · 15–20 min</span><span class="count"></span></summary>
+      <div class="city-body">
+        <div class="hook"><div class="label">Gancho sugerido</div><p>"Viena tem um bolo tão famoso que já virou briga na justiça. Hoje eu vou provar."</p></div>
+        <ul class="check">
+          <li><label><input type="checkbox"><span>Deslocamento: trem para Viena, plano da janela e chegada na estação</span></label></li>
+          <li><label><input type="checkbox"><span>Catedral de Santo Estêvão: subir na torre e gravar o telhado colorido de perto</span></label></li>
+          <li><label><input type="checkbox"><span>Hofburg: plano aberto</span></label></li>
+          <li><label><input type="checkbox"><span>Ópera Estatal iluminada à noite</span></label></li>
+          <li><label><input type="checkbox"><span>Palácio de Schönbrunn: jardins e subida até a Gloriette. Vista da cidade e fotos para a thumbnail.</span></label></li>
+          <li><label><input type="checkbox"><span>Bonde na Ringstraße: plano pela janela</span></label></li>
+          <li><label><input type="checkbox"><span>Café vienense: Café Central ou Sachertorte no Café Sacher, provar e reagir</span></label></li>
+          <li><label><input type="checkbox"><span>Wiener Schnitzel <em>(o Figlmüller é o clássico)</em></span></label></li>
+          <li><label><input type="checkbox"><span>Naschmarkt: o mercado de rua</span></label></li>
+          <li><label><input type="checkbox"><span>Prater: roda-gigante Riesenrad ao entardecer</span></label></li>
+          <li><label><input type="checkbox"><span>Hundertwasserhaus: o prédio colorido e torto</span></label></li>
+          <li><label><input type="checkbox"><span>Belvedere: O Beijo, de Klimt <span class="tag">opcional</span> <em>(confira na entrada as regras de filmagem)</em></span></label></li>
+          <li><label><input type="checkbox"><span>Reflexão do dia e chamada: "Amanhã: Bratislava"</span></label></li>
+        </ul>
+        <p class="fact"><b>Curiosidade para contar:</b> o Hotel Sacher e a confeitaria Demel brigaram na justiça durante anos pelo direito de chamar o seu bolo de "Sachertorte original". A roda-gigante do Prater é de 1897.</p>
+      </div>
+    </details>
+
+    <details class="city" id="bratislava" data-sec="bratislava">
+      <summary><h3>Bratislava</h3><span class="meta">EP 06 · 8–12 min</span><span class="count"></span></summary>
+      <div class="city-body">
+        <div class="hook"><div class="label">Gancho sugerido</div><p>"Tem um homem saindo do bueiro no meio de Bratislava. E ele tá lá desde 1997."</p></div>
+        <ul class="check">
+          <li><label><input type="checkbox"><span>Deslocamento: trem de Viena <em>(cerca de 1h)</em> ou barco pelo Danúbio <em>(confira se está operando na data)</em>. O barco rende imagens lindas.</span></label></li>
+          <li><label><input type="checkbox"><span>Castelo de Bratislava: o castelo branco de quatro torres, com o Danúbio de fundo</span></label></li>
+          <li><label><input type="checkbox"><span>Cidade Velha: Portão de Michael</span></label></li>
+          <li><label><input type="checkbox"><span>Estátua Čumil, o homem do bueiro: você interagindo com ele</span></label></li>
+          <li><label><input type="checkbox"><span>Catedral de São Martinho</span></label></li>
+          <li><label><input type="checkbox"><span>Igreja Azul <em>(Santa Isabel)</em>: detalhes da cor</span></label></li>
+          <li><label><input type="checkbox"><span>Ponte SNP e a torre UFO: mirante no topo, pôr do sol</span></label></li>
+          <li><label><input type="checkbox"><span>Comida: bryndzové halušky, o prato nacional <em>(nhoque de batata com queijo de ovelha)</em></span></label></li>
+          <li><label><input type="checkbox"><span>Chamada: "Último destino da viagem: Budapeste"</span></label></li>
+        </ul>
+        <p class="fact"><b>Curiosidade para contar:</b> por mais de 250 anos, os reis da Hungria foram coroados na Catedral de São Martinho, aqui em Bratislava.</p>
+      </div>
+    </details>
+
+    <details class="city" id="budapeste" data-sec="budapeste">
+      <summary><h3>Budapeste</h3><span class="meta">EP 07 · 15–20 min · final da série</span><span class="count"></span></summary>
+      <div class="city-body">
+        <div class="hook"><div class="label">Gancho sugerido</div><p>"Esse é o prédio mais bonito que eu vi na viagem inteira. Por isso eu deixei ele pro último episódio."</p></div>
+        <ul class="check">
+          <li><label><input type="checkbox"><span>Deslocamento: trem de Bratislava <em>(cerca de 2h30)</em></span></label></li>
+          <li><label><input type="checkbox"><span>Parlamento visto do outro lado do rio <em>(Batthyány tér)</em>, de dia e iluminado à noite</span></label></li>
+          <li><label><input type="checkbox"><span>Bastião dos Pescadores ao amanhecer, ainda vazio</span></label></li>
+          <li><label><input type="checkbox"><span>Igreja de Matias: o telhado colorido</span></label></li>
+          <li><label><input type="checkbox"><span>Funicular do Castelo de Buda</span></label></li>
+          <li><label><input type="checkbox"><span>Ponte das Correntes: atravessar caminhando</span></label></li>
+          <li><label><input type="checkbox"><span>Basílica de Santo Estêvão: subir na cúpula e gravar a vista</span></label></li>
+          <li><label><input type="checkbox"><span>Monte Gellért: panorâmica da cidade</span></label></li>
+          <li><label><input type="checkbox"><span>Termas Széchenyi: você na piscina e planos abertos</span></label></li>
+          <li><label><input type="checkbox"><span>Mercado Central: lángos <em>(pão frito)</em> e páprica</span></label></li>
+          <li><label><input type="checkbox"><span>Ruin bar à noite <em>(o Szimpla Kert é o mais conhecido)</em></span></label></li>
+          <li><label><input type="checkbox"><span>Sapatos no Danúbio: um momento de silêncio</span></label></li>
+          <li><label><input type="checkbox"><span>Cruzeiro noturno no Danúbio: cenário do encerramento da série</span></label></li>
+          <li><label><input type="checkbox"><span>Fala final de 1 a 2 minutos sobre a viagem inteira: o que você leva dela</span></label></li>
+        </ul>
+        <div class="note"><div class="label">Atenção</div>Os Sapatos no Danúbio são um memorial às vítimas do Holocausto. Sem pose e sem trend. Na edição, esse trecho entra sem música animada. Nas termas, não filme outras pessoas de perto.</div>
+      </div>
+    </details>
+  </section>
+
+  <section class="block" id="fimdodia">
+    <h2>Fim do dia</h2>
+    <p class="lead">Cinco minutos à noite poupam horas de edição.</p>
+    <details class="city" data-sec="fimdodia" open>
+      <summary><h3>Rotina da noite</h3><span class="meta">Todos os dias</span><span class="count"></span></summary>
+      <div class="city-body">
+        <ul class="check">
+          <li><label><input type="checkbox"><span>Descarregar tudo em pastas: <em>EuroTrip › EP01_Madri › Dia01</em>, com uma subpasta <em>Audio</em> para os arquivos do microfone</span></label></li>
+          <li><label><input type="checkbox"><span>Backup em dois lugares: HD externo e nuvem</span></label></li>
+          <li><label><input type="checkbox"><span>Só apagar do celular depois de conferir o backup</span></label></li>
+          <li><label><input type="checkbox"><span>Anotar no celular os três melhores momentos do dia. Me mande essa nota: ela vira o mapa da edição.</span></label></li>
+          <li><label><input type="checkbox"><span>Carregar celular, microfone e power bank</span></label></li>
+        </ul>
+      </div>
+    </details>
+    <p class="fact">As marcações valem para a viagem inteira. A rotina da noite é uma lista só, então desmarque tudo dela antes de dormir para usar de novo no dia seguinte.</p>
+  </section>
+
+  <div class="reset">
+    <button type="button" id="reset">Limpar todas as marcações</button>
+    <span id="confirm" hidden>Tem certeza? <button type="button" class="danger" id="reset-yes">Sim, limpar</button> <button type="button" id="reset-no">Cancelar</button></span>
+  </div>
+
+  <footer>Versão 1. Depois que eu analisar os vlogs de referência, ajusto ritmo e estrutura aqui.</footer>
+</main>
+
+<script>
+(function () {
+  var KEY = "eurotrip-roteiro-v1";
+  var state = {};
+  try { state = JSON.parse(localStorage.getItem(KEY) || "{}") || {}; } catch (e) { state = {}; }
+  function save() { try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) {} }
+  function slug(t) { return t.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "").slice(0, 60); }
+
+  var boxes = [];
+  document.querySelectorAll("details[data-sec]").forEach(function (sec) {
+    sec.querySelectorAll("ul.check input").forEach(function (box) {
+      var id = sec.dataset.sec + "--" + slug(box.nextElementSibling.textContent);
+      box.id = id;
+      box.checked = !!state[id];
+      boxes.push(box);
+      box.addEventListener("change", function () {
+        if (box.checked) state[id] = 1; else delete state[id];
+        save(); update();
+      });
+    });
+  });
+
+  function update() {
+    var done = 0;
+    document.querySelectorAll("details[data-sec]").forEach(function (sec) {
+      var all = sec.querySelectorAll("ul.check input");
+      var n = 0;
+      all.forEach(function (b) { if (b.checked) n++; });
+      done += n;
+      var c = sec.querySelector(".count");
+      c.textContent = n + "/" + all.length;
+      c.classList.toggle("full", n === all.length && all.length > 0);
+    });
+    document.getElementById("total").textContent = done + " de " + boxes.length + " itens";
+    document.getElementById("bar").style.width = (boxes.length ? (done / boxes.length) * 100 : 0) + "%";
+  }
+  update();
+
+  var confirmEl = document.getElementById("confirm");
+  document.getElementById("reset").addEventListener("click", function () { confirmEl.hidden = false; });
+  document.getElementById("reset-no").addEventListener("click", function () { confirmEl.hidden = true; });
+  document.getElementById("reset-yes").addEventListener("click", function () {
+    state = {}; save();
+    boxes.forEach(function (b) { b.checked = false; });
+    confirmEl.hidden = true; update();
+  });
+
+  var hash = location.hash.slice(1);
+  if (hash) { var t = document.getElementById(hash); if (t && t.tagName === "DETAILS") t.open = true; }
+  document.querySelectorAll(".route a").forEach(function (a) {
+    a.addEventListener("click", function () {
+      var t = document.getElementById(a.getAttribute("href").slice(1));
+      if (t && t.tagName === "DETAILS") t.open = true;
+    });
+  });
+})();
+</script>
